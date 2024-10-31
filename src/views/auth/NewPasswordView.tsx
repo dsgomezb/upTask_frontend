@@ -5,7 +5,7 @@ import { ConfirmToken } from '@/types/index';
 
 export default function NewPasswordView() {
 
-    const [token, setToken] = useState<ConfirmToken>('')
+    const [token, setToken] = useState<ConfirmToken['token']>('')
     const [isValidaToken, setIsValidToken] = useState(false)
 
     return (

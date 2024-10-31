@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 type NewPasswordTokenProps = {
-    token: ConfirmToken['token'],
-    setToken: React.Dispatch<React.SetStateAction<ConfirmToken>>,
+    token: ConfirmToken['token']
+    setToken: React.Dispatch<React.SetStateAction<string>>
     setIsValidToken: React.Dispatch<React.SetStateAction<boolean>>
 }
 

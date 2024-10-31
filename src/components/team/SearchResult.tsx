@@ -1,19 +1,20 @@
-import { addUserToProject } from "@/api/TeamAPI"
-import { TeamMember } from "@/types/index"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { TeamMember } from "@/types/index"
+import { addUserToProject } from "@/api/TeamAPI"
 import { toast } from "react-toastify"
+import { useNavigate, useParams } from "react-router-dom"
 
 type SearchResultProps = {
-    user: TeamMember,
+    user: TeamMember
     reset: () => void
 }
 
 export default function SearchResult({ user, reset }: SearchResultProps) {
 
+    const navigate = useNavigate()
     const params = useParams()
     const projectId = params.projectId!
-
+    
     const queryClient = useQueryClient()
     const { mutate } = useMutation({
         mutationFn: addUserToProject,
@@ -23,11 +24,12 @@ export default function SearchResult({ user, reset }: SearchResultProps) {
         onSuccess: (data) => {
             toast.success(data)
             reset()
+            navigate(location.pathname, {replace: true})
             queryClient.invalidateQueries({queryKey: ['projectTeam', projectId]})
         }
     })
 
-    const handleAddUserProject = () => {
+    const handleAddUserToProject = () => {
         const data = {
             projectId,
             id: user._id
@@ -42,10 +44,8 @@ export default function SearchResult({ user, reset }: SearchResultProps) {
                 <p>{user.name}</p>
                 <button
                     className="text-purple-600 hover:bg-purple-100 px-10 py-3 font-bold cursor-pointer"
-                    onClick={handleAddUserProject}
-                >
-                    Agregar al proyecto
-                </button>
+                    onClick={handleAddUserToProject}
+                >Agregar al Proyecto</button>
             </div>
         </>
     )
