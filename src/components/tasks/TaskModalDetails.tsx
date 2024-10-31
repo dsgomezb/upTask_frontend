@@ -101,7 +101,7 @@ export default function TaskModalDetails() {
                                                     <li key={activityLog._id}>
                                                         <span className='font-bold text-slate-600'>
                                                             { statusTranslations[activityLog.status] }
-                                                        </span>{' '} por: {activityLog.user.name}
+                                                        </span>{' '} por: {activityLog.user?.name}
                                                     </li>
                                                 ))}
                                             </ul>
